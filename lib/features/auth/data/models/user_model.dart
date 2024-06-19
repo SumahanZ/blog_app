@@ -37,7 +37,7 @@ class UserModel {
       '_id': id,
       'email': email,
       'token': token,
-      'name': name,
+      'username': name,
     };
   }
 
@@ -55,7 +55,7 @@ class UserModel {
       id: map['_id'] ?? "",
       email: map['email'] ?? "",
       token: map['token'] ?? "",
-      name: map['name'] ?? "",
+      name: map['username'] ?? "",
     );
   }
 
@@ -66,7 +66,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(_id: $id, email: $email, token: $token, name: $name)';
+    return 'UserModel(_id: $id, email: $email, token: $token, username: $name)';
   }
 
   @override

@@ -66,7 +66,6 @@ final class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, User>> getUserData({required String token}) async {
     try {
       final token = authLocalDataSource.getToken();
-
       if (token == "" || token == null) {
         return Left(ResponseFailure(message: "Not logged in"));
       }

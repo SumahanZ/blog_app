@@ -80,8 +80,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   Future<UserModel?> getUserData({String? token}) async {
     final response = await dio.post("/get-user",
         data: {
-          "/get-user"
-              "token": token,
+          "token": token,
         },
         options: Options(headers: {'Content-Type': 'application/json'}));
 
@@ -90,7 +89,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
           errorMessage: response.statusMessage,
           statusCode: response.statusCode.toString());
     } else if (response.statusCode != null) {
-      return UserModel.fromJson(response.data);
+      return UserModel.fromJson(jsonEncode(response.data));
     } else {
       throw UnknownException(
           errorMessage: response.statusMessage,

@@ -59,7 +59,7 @@ module.exports = {
             }
 
             const userFound = await User.findById(decodedToken.id);
-            return res.status(201).json({ ...userFound._doc })
+            return res.status(201).json({ ...userFound._doc, token: req.body.token })
         } catch (error) {
             return res.status(500).json({
                 "message": error
