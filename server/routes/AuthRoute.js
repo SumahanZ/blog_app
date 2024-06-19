@@ -3,6 +3,6 @@ const authController = require("../controllers/AuthController")
 //the end points of the routes
 router.post("/register", authController.signupUser)
 router.post("/login", authController.loginUser)
-router.get("/get-user", authController.getUser)
+router.post("/get-user", authController.getUser)
 
 module.exports = router;

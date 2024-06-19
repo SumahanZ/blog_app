@@ -12,7 +12,7 @@ abstract interface class AuthRemoteDataSource {
       {required String name, required String email, required String password});
   Future<UserModel> loginWithEmailPassword(
       {required String email, required String password});
-  Future<UserModel?> getUserData({required String token});
+  Future<UserModel?> getUserData({String? token});
 }
 
 //pass in the supabaseClient using DI instead of instantiating it
@@ -77,10 +77,11 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel?> getUserData({required String token}) async {
-    final response = await dio.get('/get-user',
+  Future<UserModel?> getUserData({String? token}) async {
+    final response = await dio.post("/get-user",
         data: {
-          "token": token,
+          "/get-user"
+              "token": token,
         },
         options: Options(headers: {'Content-Type': 'application/json'}));
 

@@ -53,7 +53,11 @@ module.exports = {
     getUser: async (req, res) => {
         try {
             const decodedToken = jwt.verify(req.body.token, process.env.JWT_SECRET);
-            console.log(decodedToken.id);
+
+            if (!decodedToken) {
+                return res.status(400).json({ "message": "Token is not valid" })
+            }
+
             const userFound = await User.findById(decodedToken.id);
             return res.status(201).json({ ...userFound._doc })
         } catch (error) {

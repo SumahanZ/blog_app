@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 
 abstract interface class AuthLocalDataSource {
   void saveToken({required String token});
-  String getToken();
+  String? getToken();
 }
 
 //pass in the supabaseClient using DI instead of instantiating it
@@ -27,7 +27,11 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   }
 
   @override
-  String getToken() {
-    return HiveBoxService.getValues<String>(box: box, key: "token");
+  String? getToken() {
+    try {
+      return HiveBoxService.getValues<String>(box: box, key: "token");
+    } catch (e) {
+      return null;
+    }
   }
 }
