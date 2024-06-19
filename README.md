@@ -1,6 +1,6 @@
 # blog_app
 
-A new Flutter project.
+Simple Blog App implemented using Bloc + Clean Architecture + Node.js + Express.js + MongoDB.
 
 ## Getting Started
 
