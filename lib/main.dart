@@ -1,5 +1,4 @@
 import 'package:blog_app/core/common/cubits/logged_status_cubit.dart';
-import 'package:blog_app/core/common/services/hive_service.dart';
 import 'package:blog_app/core/theme/theme.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
@@ -28,10 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    DependencyInjector.getIt<AuthBloc>().add(AuthCurrentUserEvent(
-        HiveBoxService.getValues(
-                box: HiveBoxService.getBox("auth"), key: "token") ??
-            ""));
+    DependencyInjector.getIt<AuthBloc>().add(AuthCurrentUserEvent(""));
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:fpdart/fpdart.dart';
 
 //UserModel is only used in datalayer it is only used to convert the raw data into a model we created specifically for the datalayer
 //UserEntity is the one we are using for our app
+//use case is only concerned with calling the repository methods
 class UserSignUp extends Usecase<User, UserSignUpParams> {
   final AuthRepository authRepository;
 

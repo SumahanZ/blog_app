@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/AuthRoute");
+const blogRouter = require("./routes/BlogRoute");
 
 const uri = "mongodb+srv://jinseianime879:HUTCjsEmz33gT6pb@cluster0.qoxi4sz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authRouter);
+app.use(blogRouter);
 
 server.listen(PORT, "0.0.0.0", async () => {
     console.log(`connected listened at ${process.env.PORT}`);

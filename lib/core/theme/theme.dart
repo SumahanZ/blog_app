@@ -19,9 +19,10 @@ class AppTheme {
         color: MaterialStatePropertyAll(AppPallete.backgroundColor)),
     scaffoldBackgroundColor: AppPallete.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(27),
-      focusedBorder: _inputBorder(AppPallete.gradient2),
-      enabledBorder: _inputBorder(),
-    ),
+        contentPadding: const EdgeInsets.all(27),
+        border: _inputBorder(),
+        focusedBorder: _inputBorder(AppPallete.gradient2),
+        enabledBorder: _inputBorder(),
+        errorBorder: _inputBorder(AppPallete.errorColor)),
   );
 }

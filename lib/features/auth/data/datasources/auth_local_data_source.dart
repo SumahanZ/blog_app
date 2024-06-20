@@ -1,9 +1,8 @@
 //create interface for the authremotedatasource, so whenever we have to change supabase to any other database, we have a strict rule to follow
 
 //datasource we are only concerned with calls made to the external database, we don;t want any other dependencies
-import 'package:blog_app/core/common/services/hive_service.dart';
 import 'package:blog_app/core/exception/exception.dart';
-import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract interface class AuthLocalDataSource {
   void saveToken({required String token});
@@ -13,14 +12,15 @@ abstract interface class AuthLocalDataSource {
 //pass in the supabaseClient using DI instead of instantiating it
 //to make it easier to test (making a mock) and make AuthRemoteDataSource not dependent on Dio client
 class AuthLocalDataSourceImpl extends AuthLocalDataSource {
-  final Box<dynamic> box;
+  final SharedPreferences prefs;
 
-  AuthLocalDataSourceImpl({required this.box});
+  AuthLocalDataSourceImpl({required this.prefs});
 
   @override
-  void saveToken({required String token}) {
+  void saveToken({required String token}) async {
     try {
-      HiveBoxService.insertBox<String>(box: box, key: "token", values: token);
+      //change sharedpreference
+      await prefs.setString('token', token);
     } catch (e) {
       throw LocalException(errorMessage: e.toString());
     }
@@ -29,7 +29,7 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   @override
   String? getToken() {
     try {
-      return HiveBoxService.getValues<String>(box: box, key: "token");
+      return prefs.getString("token");
     } catch (e) {
       return null;
     }
